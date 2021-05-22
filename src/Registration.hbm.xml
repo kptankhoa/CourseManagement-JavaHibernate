@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Registration" table="registration" schema="coursesdb">
+        <composite-id mapped="true" class="model.RegistrationPK">
+            <key-property name="studentId">
+                <column name="student_id" sql-type="varchar(45)" length="45"/>
+            </key-property>
+            <key-property name="courseId">
+                <column name="course_id" sql-type="varchar(45)" length="45"/>
+            </key-property>
+        </composite-id>
+        <property name="registrationTime">
+            <column name="registration_time" sql-type="datetime"/>
+        </property>
+    </class>
+</hibernate-mapping>
