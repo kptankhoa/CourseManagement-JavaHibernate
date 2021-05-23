@@ -1,23 +1,36 @@
 package main;
 
-import dao.SubjectDAO;
-import model.Subject;
+import model.Account;
+import model.AccountManager;
+
+import static java.lang.System.out;
 
 
 public class app {
     public static void main(String[] args) {
-//        ArrayList<Subject> sjs =SubjectDAO.getAllSubjects();
-//        sjs.forEach(sj-> System.out.println(sj.toString()));
-
-//        Subject sj = SubjectDAO.getSubjectById("CSC13102");
-//        System.out.println(sj.toString());
-
-        Subject sj = SubjectDAO.addSubject(new Subject("CSC13115", "Các công nghệ mới trong phát triển phần mềm", 4));
-        if (sj!=null){
-            System.out.println(sj.toString());
-        } else{
-            System.out.println("bluhh");
+        Account acc = AccountManager.logIn(new Account("kptankhoa", "tankhoa99", "ministry"));
+        if (acc != null) {
+            out.println("logged in with: " + acc);
+            out.println("Current: " + AccountManager.activeAccount);
+        } else {
+            out.println("log in failed");
         }
+
+        acc = AccountManager.logIn(new Account("1712537", "1712537"));
+        if (acc != null) {
+            out.println("logged in with: " + acc);
+            out.println("Current: " + AccountManager.activeAccount);
+        } else {
+            out.println("log in failed");
+        }
+
+        acc = AccountManager.logOut();
+        if (acc != null) {
+            out.println("Logged out from:" + acc);
+            out.println("Current: " + AccountManager.activeAccount);
+        } else out.println("no current active account/ log out failed");
+
+
     }
 }
 
