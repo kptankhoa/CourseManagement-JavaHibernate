@@ -8,7 +8,28 @@ public class Semester {
     private String name;
     private String schoolYear;
     private Date startDate;
-    private String endDay;
+    private Date endDay;
+
+    public Semester() {}
+
+    public Semester(int semesterId, String name, String schoolYear, Date startDate, Date endDay) {
+        this.semesterId = semesterId;
+        this.name = name;
+        this.schoolYear = schoolYear;
+        this.startDate = startDate;
+        this.endDay = endDay;
+    }
+
+    @Override
+    public String toString() {
+        return "Semester{" +
+                "semesterId=" + semesterId +
+                ", name='" + name + '\'' +
+                ", schoolYear='" + schoolYear + '\'' +
+                ", startDate=" + startDate +
+                ", endDay='" + endDay + '\'' +
+                '}';
+    }
 
     public int getSemesterId() {
         return semesterId;
@@ -42,11 +63,11 @@ public class Semester {
         this.startDate = startDate;
     }
 
-    public String getEndDay() {
+    public Date getEndDay() {
         return endDay;
     }
 
-    public void setEndDay(String endDay) {
+    public void setEndDay(Date endDay) {
         this.endDay = endDay;
     }
 

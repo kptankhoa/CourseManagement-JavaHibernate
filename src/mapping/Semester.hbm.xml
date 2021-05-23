@@ -18,7 +18,7 @@
             <column name="start_date" sql-type="date"/>
         </property>
         <property name="endDay">
-            <column name="end_day" sql-type="varchar(45)" length="45"/>
+            <column name="end_day" sql-type="date"/>
         </property>
     </class>
 </hibernate-mapping>

@@ -51,7 +51,7 @@ public class StudentDAO {
             transaction = session.beginTransaction();
             session.save(student);
             transaction.commit();
-        } catch (HibernateException ex) { //Log the exception
+        } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
         } finally {
@@ -70,7 +70,7 @@ public class StudentDAO {
             transaction = session.beginTransaction();
             session.update(student);
             transaction.commit();
-        } catch (HibernateException ex) { //Log the exception
+        } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
         } finally {
@@ -89,7 +89,7 @@ public class StudentDAO {
             transaction = session.beginTransaction();
             session.delete(student);
             transaction.commit();
-        } catch (HibernateException ex) { //Log the exception
+        } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
         } finally {

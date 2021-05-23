@@ -1,6 +1,6 @@
 package dao;
 
-import model.Clazz;
+import model.Semester;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -9,30 +9,30 @@ import utils.HibernateUtil;
 
 import java.util.ArrayList;
 
-public class ClazzDAO {
-    public static ArrayList<Clazz> getAllClass() {
-        ArrayList<Clazz> classes = null;
+public class SemesterDAO {
+    public static ArrayList<Semester> getAllSemesters() {
+        ArrayList<Semester> semesters = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            String hql = "from Clazz";
+            String hql = "from Semester";
             Query query = session.createQuery(hql);
-            classes = (ArrayList<Clazz>) query.list();
+            semesters = (ArrayList<Semester>) query.list();
         } catch (HibernateException ex) {
             System.err.println(ex);
         } finally {
             session.close();
         }
-        return classes;
+        return semesters;
     }
 
-    public static Clazz getClassById(String classId){
-        Clazz res = null;
+    public static Semester getSemesterById(int semesterId) {
+        Semester res = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            String hql = "select c from Clazz c where c.classId = :classId";
+            String hql = "select s from Semester s where s.semesterId = :semesterId";
             Query query = session.createQuery(hql);
-            query.setString("classId", classId);
-            res = (Clazz) query.uniqueResult();
+            query.setString("semesterId", String.valueOf(semesterId));
+            res = (Semester) query.uniqueResult();
         } catch (HibernateException ex) {
             System.err.println(ex);
         } finally {
@@ -41,60 +41,60 @@ public class ClazzDAO {
         return res;
     }
 
-    public static Clazz addClass(Clazz clazz) {
+    public static Semester addSemester(Semester semester) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (ClazzDAO.getClassById(clazz.getClassId()) != null) {
+        if (SemesterDAO.getSemesterById(semester.getSemesterId()) != null) {
             return null;
         }
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.save(clazz);
+            session.save(semester);
             transaction.commit();
-        } catch (HibernateException ex) { //Log the exception
+        } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
         } finally {
             session.close();
         }
-        return clazz;
+        return semester;
     }
 
-    public static Clazz updateClass(Clazz clazz) {
+    public static Semester updateSemester(Semester semester) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (ClazzDAO.getClassById(clazz.getClassId()) == null) {
+        if (SemesterDAO.getSemesterById(semester.getSemesterId()) == null) {
             return null;
         }
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(clazz);
+            session.update(semester);
             transaction.commit();
-        } catch (HibernateException ex) { //Log the exception
+        } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
         } finally {
             session.close();
         }
-        return clazz;
+        return semester;
     }
 
-    public static Clazz deleteClass(Clazz clazz) {
+    public static Semester deleteSemester(Semester semester){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (ClazzDAO.getClassById(clazz.getClassId()) == null) {
+        if (SemesterDAO.getSemesterById(semester.getSemesterId()) == null) {
             return null;
         }
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.delete(clazz);
+            session.delete(semester);
             transaction.commit();
-        } catch (HibernateException ex) { //Log the exception
+        } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
         } finally {
             session.close();
         }
-        return clazz;
+        return semester;
     }
 }

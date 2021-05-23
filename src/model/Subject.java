@@ -7,6 +7,24 @@ public class Subject {
     private String name;
     private int credits;
 
+    public Subject() {
+    }
+
+    public Subject(String subjectId, String name, int credits) {
+        this.subjectId = subjectId;
+        this.name = name;
+        this.credits = credits;
+    }
+
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "subjectId='" + subjectId + '\'' +
+                ", name='" + name + '\'' +
+                ", credits=" + credits +
+                '}';
+    }
+
     public String getSubjectId() {
         return subjectId;
     }
