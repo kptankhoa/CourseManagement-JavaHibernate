@@ -14,7 +14,7 @@
 <!--    Mapping  -->
     <mapping resource="mapping/Account.hbm.xml"/>
     <mapping resource="mapping/Class.hbm.xml"/>
-<!--    <mapping resource="mapping/Course.hbm.xml"/>-->
+    <mapping resource="mapping/Course.hbm.xml"/>
 <!--    <mapping resource="mapping/Registration.hbm.xml"/>-->
 <!--    <mapping resource="mapping/RegistrationSession.hbm.xml"/>-->
     <mapping resource="mapping/Semester.hbm.xml"/>
