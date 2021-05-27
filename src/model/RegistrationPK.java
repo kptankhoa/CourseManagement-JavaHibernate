@@ -4,23 +4,40 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class RegistrationPK implements Serializable {
-    private String studentId;
-    private String courseId;
+    private Course course;
+    private Student student;
 
-    public String getStudentId() {
-        return studentId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
-    public String getCourseId() {
-        return courseId;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public RegistrationPK() {
+        super();
+    }
+
+    public RegistrationPK(Course course, Student student) {
+        this.course = course;
+        this.student = student;
+    }
+
+    @Override
+    public String toString() {
+        return "RegistrationPK{" +
+                "course=" + course +
+                ", student=" + student +
+                '}';
     }
 
     @Override
@@ -28,11 +45,11 @@ public class RegistrationPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RegistrationPK that = (RegistrationPK) o;
-        return Objects.equals(studentId, that.studentId) && Objects.equals(courseId, that.courseId);
+        return Objects.equals(course, that.course) && Objects.equals(student, that.student);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(studentId, courseId);
+        return Objects.hash(course, student);
     }
 }

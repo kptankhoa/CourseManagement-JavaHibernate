@@ -63,15 +63,6 @@ public class Student {
         this.username = username;
     }
 
-//    public String getClassId() {
-//        return classId;
-//    }
-//
-//    public void setClassId(String classId) {
-//        this.classId = classId;
-//    }
-
-
     public Clazz getClazz() {
         return clazz;
     }
@@ -102,7 +93,7 @@ public class Student {
                 ", gender='" + gender + '\'' +
                 ", dob=" + dob +
                 ", username='" + username + '\'' +
-                ", class='" + clazz.getClassId() + '\'' +
+                ", class='" + clazz + '\'' +
                 '}';
     }
 }

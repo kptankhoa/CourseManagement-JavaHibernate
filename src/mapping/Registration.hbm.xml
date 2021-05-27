@@ -5,13 +5,13 @@
 <hibernate-mapping>
 
     <class name="model.Registration" table="registration" schema="coursesdb">
-        <composite-id mapped="true" class="model.RegistrationPK">
-            <key-property name="studentId">
+        <composite-id name="pk" class="model.RegistrationPK">
+            <key-many-to-one name="student" class="model.Student" lazy="false">
                 <column name="student_id" sql-type="varchar(45)" length="45"/>
-            </key-property>
-            <key-property name="courseId">
+            </key-many-to-one>
+            <key-many-to-one name="course" class="model.Course" lazy="false">
                 <column name="course_id" sql-type="varchar(45)" length="45"/>
-            </key-property>
+            </key-many-to-one>
         </composite-id>
         <property name="registrationTime">
             <column name="registration_time" sql-type="datetime"/>

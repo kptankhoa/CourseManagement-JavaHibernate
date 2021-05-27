@@ -1,27 +1,27 @@
 package model;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 
 public class Registration {
-    private String studentId;
-    private String courseId;
+    private RegistrationPK pk;
     private Timestamp registrationTime;
 
-    public String getStudentId() {
-        return studentId;
+    public Registration() {
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+
+
+    public Registration(RegistrationPK pk, Timestamp registrationTime) {
+        this.pk = pk;
+        this.registrationTime = registrationTime;
     }
 
-    public String getCourseId() {
-        return courseId;
+    public RegistrationPK getPk() {
+        return pk;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public void setPk(RegistrationPK pk) {
+        this.pk = pk;
     }
 
     public Timestamp getRegistrationTime() {
@@ -33,15 +33,10 @@ public class Registration {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Registration that = (Registration) o;
-        return Objects.equals(studentId, that.studentId) && Objects.equals(courseId, that.courseId) && Objects.equals(registrationTime, that.registrationTime);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(studentId, courseId, registrationTime);
+    public String toString() {
+        return "Registration{" +
+                "pk=" + pk +
+                ", registrationTime=" + registrationTime +
+                '}';
     }
 }

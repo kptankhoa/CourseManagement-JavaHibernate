@@ -11,6 +11,7 @@ public class Course {
     private Shift shift;
 
     public Course() {
+        super();
     }
 
     public Course(String courseId, Subject subject, Semester semester, String lecturer, String room, Shift shift) {
@@ -87,13 +88,11 @@ public class Course {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
-        return Objects.equals(courseId, course.courseId) && Objects.equals(lecturer, course.lecturer) && Objects.equals(room, course.room);
+        return Objects.equals(courseId, course.courseId) && Objects.equals(subject, course.subject) && Objects.equals(semester, course.semester) && Objects.equals(lecturer, course.lecturer) && Objects.equals(room, course.room) && Objects.equals(shift, course.shift);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(courseId, lecturer, room);
+        return Objects.hash(courseId, subject, semester, lecturer, room, shift);
     }
-
-
 }

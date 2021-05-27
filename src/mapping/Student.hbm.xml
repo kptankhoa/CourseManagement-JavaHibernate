@@ -24,7 +24,6 @@
 <!--            <column name="class_id" sql-type="varchar(45)" length="45"/>-->
 <!--        </property>-->
         <many-to-one name="clazz" class="model.Clazz" fetch="join" lazy="false" cascade="save-update">
-<!--            <column length="45" name="class_id" not-null="true"/>-->
             <column name="class_id" sql-type="varchar(45)" length="45"/>
         </many-to-one>
     </class>
