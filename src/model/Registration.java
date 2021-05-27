@@ -10,7 +10,6 @@ public class Registration {
     }
 
 
-
     public Registration(RegistrationPK pk, Timestamp registrationTime) {
         this.pk = pk;
         this.registrationTime = registrationTime;

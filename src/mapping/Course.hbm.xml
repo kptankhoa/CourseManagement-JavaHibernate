@@ -8,15 +8,9 @@
         <id name="courseId">
             <column name="course_id" sql-type="varchar(45)" length="45"/>
         </id>
-<!--        <property name="subjectId">-->
-<!--            <column name="subject_id" sql-type="varchar(45)" length="45"/>-->
-<!--        </property>-->
         <many-to-one name="subject" class="model.Subject" fetch="join" lazy="false" cascade="save-update">
             <column name="subject_id" sql-type="varchar(45)" length="45"/>
         </many-to-one>
-<!--        <property name="semesterId">-->
-<!--            <column name="semester_id" sql-type="int"/>-->
-<!--        </property>-->
         <many-to-one name="semester" class="model.Semester" fetch="join" lazy="false" cascade="save-update">
             <column name="semester_id" sql-type="int"/>
         </many-to-one>
@@ -26,9 +20,6 @@
         <property name="room">
             <column name="room" sql-type="varchar(45)" length="45"/>
         </property>
-<!--        <property name="shiftId">-->
-<!--            <column name="shift_id" sql-type="int"/>-->
-<!--        </property>-->
         <many-to-one name="shift" class="model.Shift" fetch="join" lazy="false" cascade="save-update">
             <column name="shift_id" sql-type="int"/>
         </many-to-one>

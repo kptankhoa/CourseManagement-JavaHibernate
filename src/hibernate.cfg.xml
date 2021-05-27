@@ -16,14 +16,11 @@
     <mapping resource="mapping/Class.hbm.xml"/>
     <mapping resource="mapping/Course.hbm.xml"/>
     <mapping resource="mapping/Registration.hbm.xml"/>
-<!--    <mapping resource="mapping/RegistrationSession.hbm.xml"/>-->
+    <mapping resource="mapping/RegistrationSession.hbm.xml"/>
     <mapping resource="mapping/Semester.hbm.xml"/>
     <mapping resource="mapping/Shift.hbm.xml"/>
     <mapping resource="mapping/Student.hbm.xml"/>
     <mapping resource="mapping/Subject.hbm.xml"/>
 
-
-    <!-- DB schema will be updated if needed -->
-    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
   </session-factory>
 </hibernate-configuration>

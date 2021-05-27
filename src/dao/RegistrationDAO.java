@@ -2,7 +2,6 @@ package dao;
 
 import model.Registration;
 import model.RegistrationPK;
-import model.Student;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,11 +11,10 @@ import utils.HibernateUtil;
 import java.util.ArrayList;
 
 public class RegistrationDAO {
-    public static ArrayList<Registration> getAllRegistrations(){
+    public static ArrayList<Registration> getAllRegistrations() {
         ArrayList<Registration> registrations = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-//            String hql = "from Registration r left join fetch r.course right join fetch r.student";
             String hql = "from Registration";
             Query query = session.createQuery(hql);
             registrations = (ArrayList<Registration>) query.list();
@@ -28,7 +26,7 @@ public class RegistrationDAO {
         return registrations;
     }
 
-    public static ArrayList<Registration> getRegistrationsByStudentId(String studentId){
+    public static ArrayList<Registration> getRegistrationsByStudentId(String studentId) {
         ArrayList<Registration> registrations = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -44,7 +42,7 @@ public class RegistrationDAO {
         return registrations;
     }
 
-    public static ArrayList<Registration> getRegistrationByCourseId(String courseId){
+    public static ArrayList<Registration> getRegistrationByCourseId(String courseId) {
         ArrayList<Registration> registrations = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -60,7 +58,7 @@ public class RegistrationDAO {
         return registrations;
     }
 
-    public static Registration getRegistrationByPk (RegistrationPK pk){
+    public static Registration getRegistrationByPk(RegistrationPK pk) {
         String studentId = pk.getStudent().getStudentId();
         String courseId = pk.getCourse().getCourseId();
         Registration res = null;
@@ -78,6 +76,7 @@ public class RegistrationDAO {
         }
         return res;
     }
+
     public static Registration addRegistration(Registration registration) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (RegistrationDAO.getRegistrationByPk(registration.getPk()) != null) {

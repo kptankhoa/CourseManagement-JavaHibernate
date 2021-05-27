@@ -1,6 +1,8 @@
 package dao;
 
-import model.Clazz;
+import model.Registration;
+import model.RegistrationSession;
+import model.Student;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -9,30 +11,30 @@ import utils.HibernateUtil;
 
 import java.util.ArrayList;
 
-public class ClazzDAO {
-    public static ArrayList<Clazz> getAllClass() {
-        ArrayList<Clazz> classes = null;
+public class RegistrationSessionDAO {
+    public static ArrayList<RegistrationSession> getAllRegistrationSessions(){
+        ArrayList<RegistrationSession> rSessions = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            String hql = "from Clazz";
+            String hql = "from RegistrationSession r left join fetch r.course";
             Query query = session.createQuery(hql);
-            classes = (ArrayList<Clazz>) query.list();
+            rSessions = (ArrayList<RegistrationSession>) query.list();
         } catch (HibernateException ex) {
             System.err.println(ex);
         } finally {
             session.close();
         }
-        return classes;
+        return rSessions;
     }
 
-    public static Clazz getClassById(String classId){
-        Clazz res = null;
+    public static RegistrationSession getRegistrationSessionById(int sessionId){
+        RegistrationSession res = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            String hql = "select c from Clazz c where c.classId = :classId";
+            String hql = "select r from RegistrationSession r where r.sessionId = :sessionId";
             Query query = session.createQuery(hql);
-            query.setString("classId", classId);
-            res = (Clazz) query.uniqueResult();
+            query.setString("sessionId", String.valueOf(sessionId));
+            res = (RegistrationSession) query.uniqueResult();
         } catch (HibernateException ex) {
             System.err.println(ex);
         } finally {
@@ -41,60 +43,61 @@ public class ClazzDAO {
         return res;
     }
 
-    public static Clazz addClass(Clazz clazz) {
+    public static RegistrationSession addRegistrationSession(RegistrationSession rSession){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (ClazzDAO.getClassById(clazz.getClassId()) != null) {
+        if (RegistrationSessionDAO.getRegistrationSessionById(rSession.getSessionId()) != null) {
             return null;
         }
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.save(clazz);
+            session.save(rSession);
             transaction.commit();
-        } catch (HibernateException ex) { //Log the exception
+        } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
         } finally {
             session.close();
         }
-        return clazz;
+        return rSession;
     }
 
-    public static Clazz updateClass(Clazz clazz) {
+    public static RegistrationSession updateRegistrationSession(RegistrationSession rSession){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (ClazzDAO.getClassById(clazz.getClassId()) == null) {
+        if (RegistrationSessionDAO.getRegistrationSessionById(rSession.getSessionId()) == null) {
             return null;
         }
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(clazz);
+            session.update(rSession);
             transaction.commit();
-        } catch (HibernateException ex) { //Log the exception
+        } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
         } finally {
             session.close();
         }
-        return clazz;
+        return rSession;
     }
 
-    public static Clazz deleteClass(Clazz clazz) {
+    public static RegistrationSession deleteRegistrationSession(RegistrationSession rSession){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (ClazzDAO.getClassById(clazz.getClassId()) == null) {
+        if (RegistrationSessionDAO.getRegistrationSessionById(rSession.getSessionId()) == null) {
             return null;
         }
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.delete(clazz);
+            session.delete(rSession);
             transaction.commit();
-        } catch (HibernateException ex) { //Log the exception
+        } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
         } finally {
             session.close();
         }
-        return clazz;
+        return rSession;
     }
+
 }

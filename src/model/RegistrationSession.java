@@ -1,12 +1,33 @@
 package model;
 
 import java.sql.Date;
-import java.util.Objects;
+
 
 public class RegistrationSession {
     private int sessionId;
+    private Course course;
     private Date startDate;
     private Date endDate;
+
+    public RegistrationSession() {
+    }
+
+    public RegistrationSession(int sessionId, Course course, Date startDate, Date endDate) {
+        this.sessionId = sessionId;
+        this.course = course;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    @Override
+    public String toString() {
+        return "RegistrationSession{" +
+                "sessionId=" + sessionId +
+                ", course=" + course +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
 
     public int getSessionId() {
         return sessionId;
@@ -14,6 +35,14 @@ public class RegistrationSession {
 
     public void setSessionId(int sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public Date getStartDate() {
@@ -32,16 +61,5 @@ public class RegistrationSession {
         this.endDate = endDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RegistrationSession that = (RegistrationSession) o;
-        return sessionId == that.sessionId && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(sessionId, startDate, endDate);
-    }
 }
