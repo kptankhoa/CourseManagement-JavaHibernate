@@ -14,9 +14,7 @@ public class AppController {
 
     public AppController() {
         loginFrame = new LoginFrame();
-        ministryFrame = new MinistryFrame();
-        studentFrame = new StudentFrame();
-
+//        studentFrame = new StudentFrame();
         loginFrame.addLoginListener(new LoginListener());
     }
 
@@ -31,14 +29,31 @@ public class AppController {
             if(acc==null){
                 loginFrame.showMessage("Wrong username or password!");
             } else {
-                if (acc.getType() == "ministry") {
+                if (acc.getType().equals("ministry")) {
                     loginFrame.setVisible(false);
-//                    ministryFrame.show()
-                } else if (acc.getType() == "student") {
+                    ministryFrame = new MinistryFrame();
+                    ministryFrame.addLogoutListener(new LogoutListener());
+                    ministryFrame.showGUI();
+                } else if (acc.getType().equals("student")) {
                     loginFrame.setVisible(false);
-//                  dentFrame.show();
+//                  studentFrame.show();
                 }
             }
         }
+    }
+
+    class LogoutListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            String command = e.getActionCommand();
+            if(command.equals(ministryFrame.ACTION_COMMAND)) {
+                AccountManager.logOut();
+                ministryFrame.dispose();
+            }
+//            else if(command.equals(studentFrame.ACTION_COMMAND)) {
+//                studentFrame.hideGUI();
+//            }
+            loginFrame.setVisible(true);
+        }
+
     }
 }

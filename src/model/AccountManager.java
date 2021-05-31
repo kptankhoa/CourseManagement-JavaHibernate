@@ -3,8 +3,11 @@ package model;
 import dao.AccountDAO;
 
 public class AccountManager {
-    public static Account activeAccount = null;
+    private static Account activeAccount = null;
 
+    public static Account getActiveAccount() {
+        return activeAccount;
+    }
     //log in, set active account, return account if successfully, null if not
     public static Account logIn(Account acc) {
         Account resAcc = AccountDAO.getAccountByUsername(acc.getUsername());

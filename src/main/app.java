@@ -1,8 +1,8 @@
 package main;
 
 import controller.AppController;
-import dao.*;
 import model.*;
+import ui.frame.MinistryFrame;
 
 public class app {
     public static void main(String[] args) {
@@ -10,6 +10,9 @@ public class app {
             public void run() {
                 AppController appController = new AppController();
                 appController.showLoginView();
+//                AccountManager.logIn(new Account("admin", "admin"));
+//                MinistryFrame mf = new MinistryFrame();
+//                mf.showGUI();
             }
         });
 
