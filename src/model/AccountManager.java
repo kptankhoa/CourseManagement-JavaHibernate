@@ -27,4 +27,9 @@ public class AccountManager {
         }
         return res;
     }
+
+    public static Account changePassword(String newPassword){
+        Account newAcc = new Account(activeAccount.getUsername(), newPassword, activeAccount.getType());
+        return AccountDAO.updateAccount(newAcc);
+    }
 }

@@ -1,9 +1,12 @@
 package ui.frame;
 
 import model.AccountManager;
+import ui.pane.changePwdOptionPane;
+import ui.panel.AccountPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MinistryFrame extends JFrame {
@@ -113,6 +116,23 @@ public class MinistryFrame extends JFrame {
     }
 
     private void initEvents() {
+        changePwdBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changePwdOptionPane.display();
+            }
+        });
+
+        accountPanelBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                AccountPanel ap = new AccountPanel();
+                rightPanel.removeAll();
+                rightPanel.revalidate();
+                rightPanel.repaint();
+                rightPanel.add(ap);
+            }
+        });
     }
 
     public void showGUI() {

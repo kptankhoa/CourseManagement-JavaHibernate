@@ -36,6 +36,7 @@ public class LoginFrame extends JFrame {
         passwordField.setBounds(150, 90, 160, 25);
         loginBtn = new JButton("Login");
         loginBtn.setBackground(new Color(0x6c757d));
+        loginBtn.setFocusable(false);
         loginBtn.setBounds(70, 130, 240, 30);
 
 
