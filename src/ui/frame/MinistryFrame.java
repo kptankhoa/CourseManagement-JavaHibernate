@@ -1,8 +1,9 @@
 package ui.frame;
 
 import model.AccountManager;
-import ui.pane.changePwdOptionPane;
+import ui.pane.account.changePwdOptionPane;
 import ui.panel.AccountPanel;
+import ui.panel.SubjectPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -133,6 +134,18 @@ public class MinistryFrame extends JFrame {
                 rightPanel.add(ap);
             }
         });
+
+        subjectPanelBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                SubjectPanel sp = new SubjectPanel();
+                rightPanel.removeAll();
+                rightPanel.revalidate();
+                rightPanel.repaint();
+                rightPanel.add(sp);
+            }
+        });
+
     }
 
     public void showGUI() {

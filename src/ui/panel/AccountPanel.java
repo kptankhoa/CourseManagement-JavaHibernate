@@ -2,12 +2,13 @@ package ui.panel;
 
 import dao.AccountDAO;
 import model.Account;
-import ui.pane.newAccountPane;
-import ui.pane.updatePwdPane;
+import ui.pane.account.newAccountPane;
+import ui.pane.account.updatePwdPane;
+import ui.util.ButtonEditor;
+import ui.util.ButtonRenderer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,7 @@ public class AccountPanel extends JPanel {
     private final JPanel mainPanel;
     private JButton addBtn;
     private ArrayList<Account> minAccs;
+
     public AccountPanel() {
         String[] columns = {"Username", "Type", "Update Password", "Delete"};
         accountTable = new JTable();
@@ -40,10 +42,10 @@ public class AccountPanel extends JPanel {
                     final JTable jTable = (JTable) e.getSource();
                     final int row = jTable.getSelectedRow();
                     final int column = jTable.getSelectedColumn();
-                    if(column==2){
+                    if (column == 2) {
                         updatePassword(minAccs.get(row));
                     }
-                    if (column == 3){
+                    if (column == 3) {
                         deleteAccount(minAccs.get(row));
                     }
                 }
@@ -109,74 +111,10 @@ public class AccountPanel extends JPanel {
     }
 
     private void deleteAccount(Account acc) {
-         AccountDAO.deleteAccount(acc);
-         showMinistryAccountList();
+        AccountDAO.deleteAccount(acc);
+        showMinistryAccountList();
     }
 
-}
-
-class ButtonRenderer extends JButton implements TableCellRenderer {
-    public ButtonRenderer() {
-        setOpaque(true);
-    }
-    @Override
-    public Component getTableCellRendererComponent(JTable table, Object value,
-                                                   boolean isSelected, boolean hasFocus, int row, int column) {
-        if (isSelected) {
-            setForeground(table.getSelectionForeground());
-            setBackground(new Color(0x6c757d));
-        } else {
-            setForeground(table.getForeground());
-            setBackground(new Color(0x6c757d));
-        }
-        setText((value == null) ? "" : value.toString());
-        return this;
-    }
-}
-
-class ButtonEditor extends DefaultCellEditor {
-    protected JButton button;
-    private String label;
-    private boolean isPushed;
-    public ButtonEditor(JCheckBox checkBox) {
-        super(checkBox);
-        button = new JButton();
-        button.setOpaque(true);
-        button.setFocusable(false);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                fireEditingStopped();
-            }
-        });
-    }
-    @Override
-    public Component getTableCellEditorComponent(JTable table, Object value,
-                                                 boolean isSelected, int row, int column) {
-        if (isSelected) {
-            button.setForeground(table.getSelectionForeground());
-            button.setBackground(table.getSelectionBackground());
-        } else {
-            button.setForeground(table.getForeground());
-            button.setBackground(new Color(0x6c757d));
-        }
-        label = (value == null) ? "" : value.toString();
-        button.setText(label);
-        isPushed = true;
-        return button;
-    }
-    @Override
-    public Object getCellEditorValue() {
-        if (isPushed) {
-        }
-        isPushed = false;
-        return label;
-    }
-    @Override
-    public boolean stopCellEditing() {
-        isPushed = false;
-        return super.stopCellEditing();
-    }
 }
 
 

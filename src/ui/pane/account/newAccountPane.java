@@ -1,4 +1,4 @@
-package ui.pane;
+package ui.pane.account;
 
 import dao.AccountDAO;
 import model.Account;

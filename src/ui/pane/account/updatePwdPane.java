@@ -1,4 +1,4 @@
-package ui.pane;
+package ui.pane.account;
 
 import dao.AccountDAO;
 import model.Account;
@@ -7,7 +7,7 @@ import model.AccountManager;
 import javax.swing.*;
 import java.awt.*;
 
-public class updatePwdPane {
+public class   updatePwdPane {
     public static void display(Account acc) {
         JTextField userField = new JTextField(acc.getUsername());
         userField.setEditable(false);
