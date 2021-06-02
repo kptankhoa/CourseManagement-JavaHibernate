@@ -93,7 +93,7 @@ public class Student {
                 ", gender='" + gender + '\'' +
                 ", dob=" + dob +
                 ", username='" + username + '\'' +
-                ", class='" + clazz + '\'' +
+                ", clazz='" + clazz + '\'' +
                 '}';
     }
 }

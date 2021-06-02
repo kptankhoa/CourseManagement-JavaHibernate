@@ -10,7 +10,7 @@ import utils.HibernateUtil;
 import java.util.ArrayList;
 
 public class ClazzDAO {
-    public static ArrayList<Clazz> getAllClass() {
+    public static ArrayList<Clazz> getAllClasses() {
         ArrayList<Clazz> classes = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
