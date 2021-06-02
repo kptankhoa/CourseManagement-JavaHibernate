@@ -16,9 +16,9 @@ import java.util.Date;
 public class newSemesterPane {
     public static void display(int newId) {
         String[] names = {"HK1", "HK2", "HK3"};
-        JComboBox semesterNameCombo = new JComboBox<String>(names);
+        JComboBox semesterNameCombo = new JComboBox(names);
         String[] schoolYears = {"2020-2021", "2021-2022", "2022-2023", "2023-2024", "2024-2025"};
-        JComboBox schoolYearCombo = new JComboBox<String>(schoolYears);
+        JComboBox schoolYearCombo = new JComboBox(schoolYears);
 
         UtilDateModel model = new UtilDateModel();
         JDatePanelImpl datePanel = new JDatePanelImpl(model);
@@ -46,9 +46,7 @@ public class newSemesterPane {
             Date endDateInUtil = (Date) endDatePicker.getModel().getValue();
             java.sql.Date startDate = new java.sql.Date(startDateInUtil.getTime());
             java.sql.Date endDate = new java.sql.Date(endDateInUtil.getTime());
-            System.out.println(startDate.toString().concat(endDate.toString()));
-            Semester newSemester = new Semester(newId + 1, name, schoolYear, startDate, endDate, 0);
-            System.out.println(newSemester);
+            Semester newSemester = new Semester(newId, name, schoolYear, startDate, endDate, 0);
             if(SemesterDAO.addSemester(newSemester)!=null){
                 JOptionPane.showMessageDialog(null, "Added successfully!");
             } else {

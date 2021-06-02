@@ -168,6 +168,17 @@ public class MinistryFrame extends JFrame {
                 rightPanel.add(cp);
             }
         });
+
+        coursePanelBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                CoursePanel cp = new CoursePanel();
+                rightPanel.removeAll();
+                rightPanel.revalidate();
+                rightPanel.repaint();
+                rightPanel.add(cp);
+            }
+        });
     }
 
     public void showGUI() {

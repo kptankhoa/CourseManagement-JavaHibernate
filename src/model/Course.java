@@ -9,18 +9,20 @@ public class Course {
     private String lecturer;
     private String room;
     private Shift shift;
+    private int slots;
 
     public Course() {
         super();
     }
 
-    public Course(String courseId, Subject subject, Semester semester, String lecturer, String room, Shift shift) {
+    public Course(String courseId, Subject subject, Semester semester, String lecturer, String room, Shift shift, int slots) {
         this.courseId = courseId;
         this.subject = subject;
         this.semester = semester;
         this.lecturer = lecturer;
         this.room = room;
         this.shift = shift;
+        this.slots = slots;
     }
 
     @Override
@@ -31,7 +33,8 @@ public class Course {
                 ", semester=" + semester +
                 ", lecturer='" + lecturer + '\'' +
                 ", room='" + room + '\'' +
-                ", shift=" + shift +
+                ", shift=" + shift + '\'' +
+                "slots=" + slots +
                 '}';
     }
 
@@ -81,6 +84,14 @@ public class Course {
 
     public void setShift(Shift shift) {
         this.shift = shift;
+    }
+
+    public int getSlots() {
+        return slots;
+    }
+
+    public void setSlots(int slots) {
+        this.slots = slots;
     }
 
     @Override

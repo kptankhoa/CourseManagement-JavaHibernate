@@ -21,7 +21,7 @@ public class newClassPane extends JPanel {
         panel.add(totalStudentField);
         panel.add(new JLabel("Number of Male Students:"));
         panel.add(totalMaleField);
-        panel.add(new JLabel("Number of Feale Students:"));
+        panel.add(new JLabel("Number of Female Students:"));
         panel.add(totalFemaleField);
         int result = JOptionPane.showConfirmDialog(null, panel, "New Class",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -33,8 +33,8 @@ public class newClassPane extends JPanel {
             if (males + females != total) {
                 JOptionPane.showMessageDialog(null, "Invalid Inputs!");
             } else {
-                Clazz newclazz = new Clazz(classId, total, males, females);
-                if (ClazzDAO.addClass(newclazz) != null) {
+                Clazz newClazz = new Clazz(classId, total, males, females);
+                if (ClazzDAO.addClass(newClazz) != null) {
                     JOptionPane.showMessageDialog(null, "Added successfully!");
                 } else {
                     System.out.println("Not added");

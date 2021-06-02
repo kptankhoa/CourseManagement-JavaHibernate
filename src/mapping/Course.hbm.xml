@@ -23,5 +23,8 @@
         <many-to-one name="shift" class="model.Shift" fetch="join" lazy="false" cascade="save-update">
             <column name="shift_id" sql-type="int"/>
         </many-to-one>
+        <property name="slots">
+            <column name="slots" sql-type="int"/>
+        </property>
     </class>
 </hibernate-mapping>
