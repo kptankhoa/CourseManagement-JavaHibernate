@@ -21,7 +21,7 @@ public class updateSubjectPane {
         panel.add(subjectNameField);
         panel.add(new JLabel("Number of credits:"));
         panel.add(subjectCreditsCombo);
-        int result = JOptionPane.showConfirmDialog(null, panel, "New Ministry",
+        int result = JOptionPane.showConfirmDialog(null, panel, "Update Subject",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             String subjectId = subjectIdField.getText();

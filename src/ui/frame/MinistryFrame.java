@@ -1,9 +1,9 @@
 package ui.frame;
 
 import model.AccountManager;
+import model.ActiveSemester;
 import ui.pane.account.changePwdOptionPane;
-import ui.panel.AccountPanel;
-import ui.panel.SubjectPanel;
+import ui.panel.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,8 +32,9 @@ public class MinistryFrame extends JFrame {
     public MinistryFrame() {
         JFrame.setDefaultLookAndFeelDecorated(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(800, 600));
+        this.setPreferredSize(new Dimension(1000, 600));
         this.setTitle("Ministry");
+        ActiveSemester.getActiveSemesterFromDB();
         initComponents();
         initEvents();
     }
@@ -52,15 +53,15 @@ public class MinistryFrame extends JFrame {
 
         JLabel helloLabel = new JLabel("Hello, ".concat(AccountManager.getActiveAccount().getUsername()));
         helloLabel.setBounds(10, 10, 200, 30);
-        helloLabel.setFont(new Font(helloLabel.getFont().getName(), Font.BOLD,17));
+        helloLabel.setFont(new Font(helloLabel.getFont().getName(), Font.BOLD, 17));
 
         logOutBtn = new JButton("Log Out");
-        logOutBtn.setBounds(670, 10, 100, 30);
+        logOutBtn.setBounds(870, 10, 100, 30);
         logOutBtn.setBackground(new Color(0x6c757d));
         logOutBtn.setFocusable(false);
 
         changePwdBtn = new JButton("Change Password");
-        changePwdBtn.setBounds(450, 10, 200, 30);
+        changePwdBtn.setBounds(650, 10, 200, 30);
         changePwdBtn.setBackground(new Color(0x6c757d));
         changePwdBtn.setFocusable(false);
 
@@ -88,7 +89,7 @@ public class MinistryFrame extends JFrame {
         studentPanelBtn = new JButton("Students");
         studentPanelBtn.setBackground(new Color(0x6c757d));
         studentPanelBtn.setFocusable(false);
-        coursePanelBtn= new JButton("Courses");
+        coursePanelBtn = new JButton("Courses");
         coursePanelBtn.setBackground(new Color(0x6c757d));
         coursePanelBtn.setFocusable(false);
         registrationSessionPanelBtn = new JButton("Registration Session");
@@ -139,6 +140,17 @@ public class MinistryFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 SubjectPanel sp = new SubjectPanel();
+                rightPanel.removeAll();
+                rightPanel.revalidate();
+                rightPanel.repaint();
+                rightPanel.add(sp);
+            }
+        });
+
+        semesterPanelBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                SemesterPanel sp = new SemesterPanel();
                 rightPanel.removeAll();
                 rightPanel.revalidate();
                 rightPanel.repaint();

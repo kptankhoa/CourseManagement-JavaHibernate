@@ -1,5 +1,6 @@
 package ui.panel;
 
+import dao.SemesterDAO;
 import dao.SubjectDAO;
 import model.Subject;
 import ui.pane.subject.newSubjectPane;
@@ -69,7 +70,7 @@ public class SubjectPanel extends JPanel {
         topPanel.setLayout(null);
         topPanel.setBackground(new Color(0xadb5bd));
         addBtn = new JButton("Add subject");
-        addBtn.setBounds(375, 0, 200, 30);
+        addBtn.setBounds(570, 0, 200, 30);
         addBtn.setBackground(new Color(0x6c757d));
         addBtn.setFocusable(false);
         addBtn.addActionListener(new ActionListener() {
@@ -81,7 +82,7 @@ public class SubjectPanel extends JPanel {
         });
         topPanel.add(addBtn);
         mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setPreferredSize(new Dimension(600, 550));
+        mainPanel.setPreferredSize(new Dimension(800, 550));
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         mainPanel.add(topPanel, BorderLayout.NORTH);
         this.setBackground(new Color(0xadb5bd));
@@ -110,7 +111,11 @@ public class SubjectPanel extends JPanel {
     }
 
     private void deleteSubject(Subject subject) {
-        SubjectDAO.deleteSubject(subject);
+        try {
+            SubjectDAO.deleteSubject(subject);
+        } catch (Exception e){
+            System.err.println(e);
+        }
         getSubjectList();
     }
 }

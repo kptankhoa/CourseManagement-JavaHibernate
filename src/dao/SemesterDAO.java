@@ -41,6 +41,22 @@ public class SemesterDAO {
         return res;
     }
 
+    public static Semester getActiveSemester() {
+        Semester res = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "select s from Semester s where s.active = 1";
+            Query query = session.createQuery(hql);
+//            query.setString("semesterId", String.valueOf(semesterId));
+            res = (Semester) query.uniqueResult();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return res;
+    }
+
     public static Semester addSemester(Semester semester) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (SemesterDAO.getSemesterById(semester.getSemesterId()) != null) {

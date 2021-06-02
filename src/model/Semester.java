@@ -9,15 +9,17 @@ public class Semester {
     private String schoolYear;
     private Date startDate;
     private Date endDay;
+    private int active;
 
     public Semester() {}
 
-    public Semester(int semesterId, String name, String schoolYear, Date startDate, Date endDay) {
+    public Semester(int semesterId, String name, String schoolYear, Date startDate, Date endDay, int active) {
         this.semesterId = semesterId;
         this.name = name;
         this.schoolYear = schoolYear;
         this.startDate = startDate;
         this.endDay = endDay;
+        this.active = active;
     }
 
     @Override
@@ -27,7 +29,8 @@ public class Semester {
                 ", name='" + name + '\'' +
                 ", schoolYear='" + schoolYear + '\'' +
                 ", startDate=" + startDate +
-                ", endDay='" + endDay + '\'' +
+                ", endDay=" + endDay +
+                ", active=" + active +
                 '}';
     }
 
@@ -69,6 +72,14 @@ public class Semester {
 
     public void setEndDay(Date endDay) {
         this.endDay = endDay;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
     }
 
     @Override

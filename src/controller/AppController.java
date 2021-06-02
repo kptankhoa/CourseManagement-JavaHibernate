@@ -2,6 +2,7 @@ package controller;
 
 import model.Account;
 import model.AccountManager;
+import model.ActiveSemester;
 import ui.frame.*;
 
 import java.awt.event.ActionEvent;

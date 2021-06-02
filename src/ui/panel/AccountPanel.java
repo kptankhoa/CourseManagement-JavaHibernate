@@ -68,7 +68,7 @@ public class AccountPanel extends JPanel {
         topPanel.setLayout(null);
         topPanel.setBackground(new Color(0xadb5bd));
         addBtn = new JButton("Add minister");
-        addBtn.setBounds(375, 0, 200, 30);
+        addBtn.setBounds(570, 0, 200, 30);
         addBtn.setBackground(new Color(0x6c757d));
         addBtn.setFocusable(false);
         addBtn.addActionListener(new ActionListener() {
@@ -80,7 +80,7 @@ public class AccountPanel extends JPanel {
         });
         topPanel.add(addBtn);
         mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setPreferredSize(new Dimension(600, 550));
+        mainPanel.setPreferredSize(new Dimension(800, 550));
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         mainPanel.add(topPanel, BorderLayout.NORTH);
         this.setBackground(new Color(0xadb5bd));
@@ -111,7 +111,11 @@ public class AccountPanel extends JPanel {
     }
 
     private void deleteAccount(Account acc) {
-        AccountDAO.deleteAccount(acc);
+        try {
+            AccountDAO.deleteAccount(acc);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
         showMinistryAccountList();
     }
 

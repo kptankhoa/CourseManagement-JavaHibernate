@@ -15,8 +15,6 @@ public class app {
                 MinistryFrame mf = new MinistryFrame();
                 mf.showGUI();
 
-//                AccountPanel ap = new AccountPanel();
-//                ap.createAndShowGUI();
             }
         });
 
