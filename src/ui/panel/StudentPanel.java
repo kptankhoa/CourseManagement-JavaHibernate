@@ -1,10 +1,13 @@
 package ui.panel;
 
+import dao.AccountDAO;
 import dao.ClazzDAO;
 import dao.StudentDAO;
+import model.Account;
 import model.Clazz;
 import model.Student;
 import ui.pane.student.newStudentPane;
+import ui.pane.student.updateStudentPane;
 import ui.util.ButtonEditor;
 import ui.util.ButtonRenderer;
 
@@ -44,12 +47,12 @@ public class StudentPanel extends JPanel {
                     final JTable jTable = (JTable) e.getSource();
                     final int row = jTable.getSelectedRow();
                     final int column = jTable.getSelectedColumn();
-                    if (column == 3) {
-//                        updateSubject(subjects.get(row));
+                    if (column == 6) {
+                        updateStudentPane.display(containerFrame, students.get(row));
                         getStudentList();
                     }
-                    if (column == 4) {
-//                        deleteSubject(subjects.get(row));
+                    if (column == 7) {
+                        resetPassword(containerFrame, students.get(row));
                     }
                 }
             }
@@ -127,6 +130,17 @@ public class StudentPanel extends JPanel {
         this.setOpaque(true);
         this.add(mainPanel);
 
+    }
+
+    private void resetPassword(JFrame parentFrame, Student student) {
+        Account studentAccount = AccountDAO.getAccountByUsername(student.getUsername());
+        studentAccount.setPassword(student.getStudentId());
+        Account res = AccountDAO.updateAccount(studentAccount);
+        if (res!= null){
+            JOptionPane.showMessageDialog(parentFrame, "Password reset!");
+        } else {
+            JOptionPane.showMessageDialog(parentFrame, "Failed to reset password!");
+        }
     }
 
     private void searchStudents(JFrame parentFrame) {
