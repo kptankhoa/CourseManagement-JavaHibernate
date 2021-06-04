@@ -1,6 +1,7 @@
 package ui.panel;
 
 import dao.CourseDAO;
+import model.ActiveSemester;
 import model.Course;
 import model.Semester;
 import ui.pane.course.newCoursePane;
@@ -22,6 +23,7 @@ public class CoursePanel extends JPanel {
     private final JPanel mainPanel;
     private JButton addBtn;
     private ArrayList<Course> courses;
+    private Semester activeSemester = ActiveSemester.getActiveSemester();
 
     public CoursePanel(JFrame containerFrame) {
         String[] columns = {"Course ID", "Subject", "Semester", "Lecturer", "Room", "Shift", "Slots", "Delete"};
@@ -86,19 +88,21 @@ public class CoursePanel extends JPanel {
     private void getCourseList() {
         DefaultTableModel model = (DefaultTableModel) courseTable.getModel();
         model.setRowCount(0);
-        courses = CourseDAO.getAllCourses();
-        if(!courses.isEmpty()){
-            for(Course course: courses){
-                String id = course.getCourseId();
-                String subject = course.getSubject().getName();
-                Semester s = course.getSemester();
-                String semester = s.getName() + "-" + s.getSchoolYear();
-                String lecturer = course.getLecturer();
-                String room = course.getRoom();
-                String shift = course.getShift().getTime();
-                int slots = course.getSlots();
-                Object[] row = {id, subject, semester, lecturer, room, shift, slots, "Delete"};
-                model.addRow(row);
+        courses = CourseDAO.getCoursesBySemesterId(activeSemester.getSemesterId());
+        if (!courses.isEmpty()) {
+            for (Course course : courses) {
+//                if (course.getSemester().equals(activeSemester)) {
+                    String id = course.getCourseId();
+                    String subject = course.getSubject().getName();
+                    Semester s = course.getSemester();
+                    String semester = s.getName() + " - " + s.getSchoolYear();
+                    String lecturer = course.getLecturer();
+                    String room = course.getRoom();
+                    String shift = course.getShift().getTime();
+                    int slots = course.getSlots();
+                    Object[] row = {id, subject, semester, lecturer, room, shift, slots, "Delete"};
+                    model.addRow(row);
+//                }
             }
         }
     }

@@ -32,6 +32,7 @@ public class newClassPane extends JPanel {
             int females = parseInt(totalFemaleField.getText());
             if (males + females != total) {
                 JOptionPane.showMessageDialog(parentFrame, "Invalid Inputs!");
+                return;
             } else {
                 Clazz newClazz = new Clazz(classId, total, males, females);
                 if (ClazzDAO.addClass(newClazz) != null) {

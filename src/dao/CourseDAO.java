@@ -26,6 +26,22 @@ public class CourseDAO {
         return courses;
     }
 
+    public static ArrayList<Course> getCoursesBySemesterId(int semesterId) {
+        ArrayList<Course> courses = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "from Course c left join fetch c.subject left join fetch c.shift left join fetch c.semester where c.semester.semesterId = :semesterId";
+            Query query = session.createQuery(hql);
+            query.setString("semesterId", String.valueOf(semesterId));
+            courses = (ArrayList<Course>) query.list();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return courses;
+    }
+
     public static Course getCourseById(String courseId){
         Course res = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

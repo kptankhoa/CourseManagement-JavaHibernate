@@ -62,9 +62,7 @@ public class updateStudentPane {
             String gender = (String) genderCombo.getSelectedItem();
             Date dobInUtil = (Date) dobPicker.getModel().getValue();
 
-            System.out.println(dobInUtil);
             java.sql.Date dob = new java.sql.Date(dobInUtil.getTime());
-            System.out.println(dob);
             String username = studentId;
             Clazz clazz = clazzes.get(classCombo.getSelectedIndex());
 

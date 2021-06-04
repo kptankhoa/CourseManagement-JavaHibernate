@@ -147,6 +147,7 @@ public class StudentPanel extends JPanel {
         String nameToSearch = searchField.getText();
         if(nameToSearch.equals("Search student by name...")){
             JOptionPane.showMessageDialog(parentFrame, "Invalid Input!");
+            return;
         }
         String classId = (String) classCombo.getSelectedItem();
         ArrayList<Student> studentsFromClass = StudentDAO.getStudentsByClassId(classId);
@@ -178,21 +179,7 @@ public class StudentPanel extends JPanel {
     }
 
     private void getStudentList() {
-        DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
-        model.setRowCount(0);
         students = StudentDAO.getAllStudents();
-        if (!students.isEmpty()) {
-            for (Student student : students) {
-                String studentId = student.getStudentId();
-                String name = student.getName();
-                String gender = student.getGender();
-                String dob = student.getDob().toString();
-                String username = student.getUsername();
-                String clazz = student.getClazz().getClassId();
-                String[] row = {studentId, name, gender, dob, username, clazz, "Update", "Reset"};
-                model.addRow(row);
-
-            }
-        }
+        updateTable(students);
     }
 }

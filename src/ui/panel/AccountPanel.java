@@ -10,15 +10,14 @@ import ui.util.ButtonRenderer;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class AccountPanel extends JPanel {
     private final JTable accountTable;
     private final JPanel mainPanel;
+    private JTextField searchField;
+    private JButton searchBtn;
     private JButton addBtn;
     private ArrayList<Account> minAccs;
 
@@ -51,7 +50,7 @@ public class AccountPanel extends JPanel {
                 }
             }
         });
-//
+
         JScrollPane scrollPane = new JScrollPane(accountTable);
         scrollPane.setBorder(BorderFactory.createLineBorder(new Color(0xadb5bd), 10));
         scrollPane.getViewport().setBackground(new Color(0xadb5bd));
@@ -78,6 +77,36 @@ public class AccountPanel extends JPanel {
                 showMinistryAccountList();
             }
         });
+        //search ui
+        searchField = new JTextField("Search account...");
+        searchField.setBounds(50, 0, 398, 30);
+        searchField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (searchField.getText().equals("Search account...")) {
+                    searchField.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (searchField.getText().isEmpty()) {
+                    searchField.setText("Search account...");
+                }
+            }
+        });
+        searchBtn = new JButton("Search");
+        searchBtn.setBounds(450, 0, 100, 30);
+        searchBtn.setBackground(new Color(0x6c757d));
+        searchBtn.setFocusable(false);
+        searchBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                searchAccounts(containerFrame);
+            }
+        });
+        topPanel.add(searchField);
+        topPanel.add(searchBtn);
         topPanel.add(addBtn);
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setPreferredSize(new Dimension(800, 550));
@@ -88,21 +117,43 @@ public class AccountPanel extends JPanel {
         this.add(mainPanel);
     }
 
-    private void showMinistryAccountList() {
+    private void searchAccounts(JFrame parentFrame) {
+        String stringToSearch = searchField.getText();
+        if (stringToSearch.equals("Search account...")) {
+            JOptionPane.showMessageDialog(parentFrame, "Invalid Input!");
+            return;
+        }
+        ArrayList<Account> resultAccs = new ArrayList<>();
+        minAccs.forEach(account -> {
+            if (account.getUsername().toLowerCase().contains(stringToSearch)) {
+                resultAccs.add(account);
+            }
+        });
+        updateTable(resultAccs);
+    }
+
+    private void updateTable(ArrayList<Account> accounts) {
         DefaultTableModel model = (DefaultTableModel) accountTable.getModel();
         model.setRowCount(0);
+        if (!accounts.isEmpty()) {
+            for (Account account : accounts) {
+                String username = account.getUsername();
+                String type = account.getType();
+                String[] row = {username, type, "Update", "Delete"};
+                model.addRow(row);
+            }
+        }
+    }
+    private void showMinistryAccountList() {
         ArrayList<Account> accounts = AccountDAO.getAllAccounts();
         if (!accounts.isEmpty()) {
             minAccs = new ArrayList<>();
             for (Account account : accounts)
                 if (account.getType().equals("ministry")) {
-                    String username = account.getUsername();
-                    String type = account.getType();
-                    String[] row = {username, type, "Update", "Delete"};
-                    model.addRow(row);
                     minAccs.add(account);
                 }
         }
+        updateTable(minAccs);
     }
 
     private void updatePassword(JFrame containerFrame, Account acc) {

@@ -8,17 +8,17 @@ public class Semester {
     private String name;
     private String schoolYear;
     private Date startDate;
-    private Date endDay;
+    private Date endDate;
     private int active;
 
     public Semester() {}
 
-    public Semester(int semesterId, String name, String schoolYear, Date startDate, Date endDay, int active) {
+    public Semester(int semesterId, String name, String schoolYear, Date startDate, Date endDate, int active) {
         this.semesterId = semesterId;
         this.name = name;
         this.schoolYear = schoolYear;
         this.startDate = startDate;
-        this.endDay = endDay;
+        this.endDate = endDate;
         this.active = active;
     }
 
@@ -29,7 +29,7 @@ public class Semester {
                 ", name='" + name + '\'' +
                 ", schoolYear='" + schoolYear + '\'' +
                 ", startDate=" + startDate +
-                ", endDay=" + endDay +
+                ", endDate=" + endDate +
                 ", active=" + active +
                 '}';
     }
@@ -66,12 +66,12 @@ public class Semester {
         this.startDate = startDate;
     }
 
-    public Date getEndDay() {
-        return endDay;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEndDay(Date endDay) {
-        this.endDay = endDay;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public int getActive() {
@@ -87,11 +87,11 @@ public class Semester {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Semester semester = (Semester) o;
-        return semesterId == semester.semesterId && Objects.equals(name, semester.name) && Objects.equals(schoolYear, semester.schoolYear) && Objects.equals(startDate, semester.startDate) && Objects.equals(endDay, semester.endDay);
+        return semesterId == semester.semesterId && active == semester.active && name.equals(semester.name) && schoolYear.equals(semester.schoolYear) && startDate.equals(semester.startDate) && endDate.equals(semester.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(semesterId, name, schoolYear, startDate, endDay);
+        return Objects.hash(semesterId, name, schoolYear, startDate, endDate);
     }
 }

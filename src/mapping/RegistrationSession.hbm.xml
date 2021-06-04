@@ -8,8 +8,8 @@
         <id name="sessionId">
             <column name="session_id" sql-type="int"/>
         </id>
-        <many-to-one name="course" class="model.Course" fetch="join" lazy="false" cascade="save-update">
-            <column name="course_id" sql-type="varchar(45)" length="45" unique="true"/>
+        <many-to-one name="semester" class="model.Semester" fetch="join" lazy="false" cascade="save-update">
+            <column name="semester_id" sql-type="int" unique="true"/>
         </many-to-one>
         <property name="startDate">
             <column name="start_date" sql-type="date"/>

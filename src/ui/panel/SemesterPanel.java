@@ -98,7 +98,7 @@ public class SemesterPanel extends JPanel {
                 String name = semester.getName();
                 String schoolYear = semester.getSchoolYear();
                 String startDate = semester.getStartDate().toString();
-                String endDate = semester.getEndDay().toString();
+                String endDate = semester.getEndDate().toString();
                 String[] row = {active, name, schoolYear, startDate, endDate, "Set", "Delete"};
                 model.addRow(row);
             }

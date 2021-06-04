@@ -1,6 +1,8 @@
-package ui.pane.semester;
+package ui.pane.session;
 
-import dao.SemesterDAO;
+import dao.RegistrationSessionDAO;
+import model.ActiveSemester;
+import model.RegistrationSession;
 import model.Semester;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -10,12 +12,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 
-public class newSemesterPane {
+public class newRegistrationSessionPane extends JPanel {
     public static void display(JFrame parentFrame, int newId) {
-        String[] names = {"HK1", "HK2", "HK3"};
-        JComboBox semesterNameCombo = new JComboBox(names);
-        String[] schoolYears = {"2020-2021", "2021-2022", "2022-2023", "2023-2024", "2024-2025"};
-        JComboBox schoolYearCombo = new JComboBox(schoolYears);
+        Semester activeSemester = ActiveSemester.getActiveSemester();
+        JTextField semesterField = new JTextField(activeSemester.getName() + " - " + activeSemester.getSchoolYear());
+        semesterField.setEditable(false);
 
         UtilDateModel model = new UtilDateModel();
         JDatePanelImpl datePanel = new JDatePanelImpl(model);
@@ -26,25 +27,21 @@ public class newSemesterPane {
         JDatePickerImpl endDatePicker = new JDatePickerImpl(datePanel2);
 
         JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(new JLabel("Name:"));
-        panel.add(semesterNameCombo);
-        panel.add(new JLabel("School Year:"));
-        panel.add(schoolYearCombo);
+        panel.add(new JLabel("New Registration Session for Semester:"));
+        panel.add(semesterField);
         panel.add(new JLabel("Start Date: "));
         panel.add(startDatePicker);
         panel.add(new JLabel("End Date: "));
         panel.add(endDatePicker);
-        int result = JOptionPane.showConfirmDialog(parentFrame, panel, "New Semester",
+        int result = JOptionPane.showConfirmDialog(parentFrame, panel, "New Registration Session",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
-            String name = (String) semesterNameCombo.getSelectedItem();
-            String schoolYear = (String) schoolYearCombo.getSelectedItem();
             Date startDateInUtil = (Date) startDatePicker.getModel().getValue();
             Date endDateInUtil = (Date) endDatePicker.getModel().getValue();
             java.sql.Date startDate = new java.sql.Date(startDateInUtil.getTime());
             java.sql.Date endDate = new java.sql.Date(endDateInUtil.getTime());
-            Semester newSemester = new Semester(newId, name, schoolYear, startDate, endDate, 0);
-            if (SemesterDAO.addSemester(newSemester) != null) {
+            RegistrationSession newRS = new RegistrationSession(newId, activeSemester, startDate, endDate);
+            if (RegistrationSessionDAO.addRegistrationSession(newRS) != null) {
                 JOptionPane.showMessageDialog(parentFrame, "Added successfully!");
             } else {
                 System.out.println("Not added");

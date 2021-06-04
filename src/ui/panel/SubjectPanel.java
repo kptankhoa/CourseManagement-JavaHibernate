@@ -2,6 +2,7 @@ package ui.panel;
 
 import dao.SemesterDAO;
 import dao.SubjectDAO;
+import model.Account;
 import model.Subject;
 import ui.pane.subject.newSubjectPane;
 import ui.pane.subject.updateSubjectPane;
@@ -11,15 +12,14 @@ import ui.util.ButtonRenderer;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class SubjectPanel extends JPanel {
     private final JTable subjectTable;
     private final JPanel mainPanel;
+    private JTextField searchField;
+    private JButton searchBtn;
     private JButton addBtn;
     private ArrayList<Subject> subjects;
 
@@ -80,6 +80,35 @@ public class SubjectPanel extends JPanel {
                 getSubjectList();
             }
         });
+        searchField = new JTextField("Search subject...");
+        searchField.setBounds(50, 0, 398, 30);
+        searchField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (searchField.getText().equals("Search subject...")) {
+                    searchField.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (searchField.getText().isEmpty()) {
+                    searchField.setText("Search subject...");
+                }
+            }
+        });
+        searchBtn = new JButton("Search");
+        searchBtn.setBounds(450, 0, 100, 30);
+        searchBtn.setBackground(new Color(0x6c757d));
+        searchBtn.setFocusable(false);
+        searchBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                searchSubjects(containerFrame);
+            }
+        });
+        topPanel.add(searchField);
+        topPanel.add(searchBtn);
         topPanel.add(addBtn);
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setPreferredSize(new Dimension(800, 550));
@@ -91,10 +120,24 @@ public class SubjectPanel extends JPanel {
 
     }
 
-    private void getSubjectList() {
+    private void searchSubjects(JFrame parentFrame) {
+        String stringToSearch = searchField.getText();
+        if (stringToSearch.equals("Search subject...")) {
+            JOptionPane.showMessageDialog(parentFrame, "Invalid Input!");
+            return;
+        }
+        ArrayList<Subject> resultSubjects = new ArrayList<>();
+        subjects.forEach(subject -> {
+            if (subject.getName().toLowerCase().contains(stringToSearch)) {
+                resultSubjects.add(subject);
+            }
+        });
+        updateTable(resultSubjects);
+    }
+
+    private void updateTable(ArrayList<Subject> subjects) {
         DefaultTableModel model = (DefaultTableModel) subjectTable.getModel();
         model.setRowCount(0);
-        subjects = SubjectDAO.getAllSubjects();
         if (!subjects.isEmpty()) {
             for (Subject subject : subjects) {
                 String subjectId = subject.getSubjectId();
@@ -104,6 +147,11 @@ public class SubjectPanel extends JPanel {
                 model.addRow(row);
             }
         }
+    }
+
+    private void getSubjectList() {
+        subjects = SubjectDAO.getAllSubjects();
+        updateTable(subjects);
     }
 
     private void updateSubject(JFrame containerFrame, Subject subject) {

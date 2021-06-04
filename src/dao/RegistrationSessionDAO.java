@@ -16,7 +16,7 @@ public class RegistrationSessionDAO {
         ArrayList<RegistrationSession> rSessions = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            String hql = "from RegistrationSession r left join fetch r.course";
+            String hql = "from RegistrationSession r left join fetch r.semester";
             Query query = session.createQuery(hql);
             rSessions = (ArrayList<RegistrationSession>) query.list();
         } catch (HibernateException ex) {

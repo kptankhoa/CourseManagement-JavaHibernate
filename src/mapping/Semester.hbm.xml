@@ -17,8 +17,8 @@
         <property name="startDate">
             <column name="start_date" sql-type="date"/>
         </property>
-        <property name="endDay">
-            <column name="end_day" sql-type="date"/>
+        <property name="endDate">
+            <column name="end_date" sql-type="date"/>
         </property>
         <property name="active">
             <column name="active" sql-type="int"/>

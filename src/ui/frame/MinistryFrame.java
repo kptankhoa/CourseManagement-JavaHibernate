@@ -20,7 +20,8 @@ public class MinistryFrame extends JFrame {
     private JButton studentPanelBtn;
     private JButton registrationSessionPanelBtn;
     private JButton coursePanelBtn;
-    private JButton registrationPanelBtn;
+    private JButton studentRegistrationPanelBtn;
+    private JButton courseRegistrationPanelBtn;
 
     private JButton changePwdBtn;
     private JButton logOutBtn;
@@ -34,9 +35,10 @@ public class MinistryFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(1000, 600));
         this.setTitle("Ministry");
-        ActiveSemester.getActiveSemesterFromDB();
         initComponents();
         initEvents(this);
+
+        ActiveSemester.getActiveSemesterFromDB();
     }
 
     private void initComponents() {
@@ -92,12 +94,15 @@ public class MinistryFrame extends JFrame {
         coursePanelBtn = new JButton("Courses");
         coursePanelBtn.setBackground(new Color(0x6c757d));
         coursePanelBtn.setFocusable(false);
-        registrationSessionPanelBtn = new JButton("Registration Session");
+        registrationSessionPanelBtn = new JButton("Registration Sessions");
         registrationSessionPanelBtn.setBackground(new Color(0x6c757d));
         registrationSessionPanelBtn.setFocusable(false);
-        registrationPanelBtn = new JButton("Registrations");
-        registrationPanelBtn.setBackground(new Color(0x6c757d));
-        registrationPanelBtn.setFocusable(false);
+        studentRegistrationPanelBtn = new JButton("Student Registrations");
+        studentRegistrationPanelBtn.setBackground(new Color(0x6c757d));
+        studentRegistrationPanelBtn.setFocusable(false);
+        courseRegistrationPanelBtn = new JButton("Course Registrations");
+        courseRegistrationPanelBtn.setBackground(new Color(0x6c757d));
+        courseRegistrationPanelBtn.setFocusable(false);
 
         leftPanel.add(accountPanelBtn);
         leftPanel.add(subjectPanelBtn);
@@ -106,7 +111,8 @@ public class MinistryFrame extends JFrame {
         leftPanel.add(studentPanelBtn);
         leftPanel.add(coursePanelBtn);
         leftPanel.add(registrationSessionPanelBtn);
-        leftPanel.add(registrationPanelBtn);
+        leftPanel.add(studentRegistrationPanelBtn);
+        leftPanel.add(courseRegistrationPanelBtn);
 
         rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
@@ -187,6 +193,16 @@ public class MinistryFrame extends JFrame {
                 rightPanel.revalidate();
                 rightPanel.repaint();
                 rightPanel.add(sp);
+            }
+        });
+        registrationSessionPanelBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                RegistrationSessionPanel rsp = new RegistrationSessionPanel(containerFrame);
+                rightPanel.removeAll();
+                rightPanel.revalidate();
+                rightPanel.repaint();
+                rightPanel.add(rsp);
             }
         });
     }

@@ -5,28 +5,18 @@ import java.sql.Date;
 
 public class RegistrationSession {
     private int sessionId;
-    private Course course;
+    private Semester semester;
     private Date startDate;
     private Date endDate;
 
     public RegistrationSession() {
     }
 
-    public RegistrationSession(int sessionId, Course course, Date startDate, Date endDate) {
+    public RegistrationSession(int sessionId, Semester semester, Date startDate, Date endDate) {
         this.sessionId = sessionId;
-        this.course = course;
+        this.semester = semester;
         this.startDate = startDate;
         this.endDate = endDate;
-    }
-
-    @Override
-    public String toString() {
-        return "RegistrationSession{" +
-                "sessionId=" + sessionId +
-                ", course=" + course +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
     }
 
     public int getSessionId() {
@@ -37,12 +27,12 @@ public class RegistrationSession {
         this.sessionId = sessionId;
     }
 
-    public Course getCourse() {
-        return course;
+    public Semester getSemester() {
+        return semester;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setSemester(Semester semester) {
+        this.semester = semester;
     }
 
     public Date getStartDate() {
@@ -60,6 +50,4 @@ public class RegistrationSession {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
-
 }
