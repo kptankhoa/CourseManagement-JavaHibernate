@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
 
 public class newCoursePane {
-    public static void display() {
+    public static void display(JFrame parentFrame) {
         JTextField courseIdField = new JTextField();
 
         ArrayList<Subject> subjects = SubjectDAO.getAllSubjects();
@@ -52,7 +52,7 @@ public class newCoursePane {
         panel.add(shiftCombo);
         panel.add(new JLabel("Number of slots:"));
         panel.add(slotsField);
-        int result = JOptionPane.showConfirmDialog(null, panel, "New Course",
+        int result = JOptionPane.showConfirmDialog(parentFrame, panel, "New Course",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             String courseId = courseIdField.getText();
@@ -65,7 +65,7 @@ public class newCoursePane {
 
             Course newCourse = new Course(courseId, subject, semester, lecturer, room, shift, slots);
             if (CourseDAO.addCourse(newCourse) != null) {
-                JOptionPane.showMessageDialog(null, "Added successfully!");
+                JOptionPane.showMessageDialog(parentFrame, "Added successfully!");
             } else {
                 System.out.println("Not added");
             }

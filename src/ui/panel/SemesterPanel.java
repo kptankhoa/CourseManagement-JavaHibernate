@@ -22,7 +22,7 @@ public class SemesterPanel extends JPanel {
     private JButton addBtn;
     private ArrayList<Semester> semesters;
 
-    public SemesterPanel() {
+    public SemesterPanel(JFrame containerFrame) {
         String[] columns = {"Active Semester", "Name", "School Year", "Start Date", "End Date", "Set Active", "Delete"};
         semesterTable = new JTable();
         semesterTable.setModel(new DefaultTableModel(columns, 0));
@@ -74,7 +74,7 @@ public class SemesterPanel extends JPanel {
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                newSemesterPane.display(semesters.get(semesters.size()-1).getSemesterId()+1);
+                newSemesterPane.display(containerFrame, semesters.get(semesters.size()-1).getSemesterId()+1);
                 getSemesterList();
             }
         });

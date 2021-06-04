@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class newAccountPane {
-    public static void display() {
+    public static void display(JFrame parentFrame) {
         JTextField userField = new JTextField();
         JPasswordField pwdField = new JPasswordField();
         JPanel panel = new JPanel(new GridLayout(0, 1));
@@ -21,11 +21,11 @@ public class newAccountPane {
             String newUser = userField.getText();
             String newPwd = pwdField.getText();
             if ((newUser.equals("")) || (newPwd.equals(""))) {
-                JOptionPane.showMessageDialog(null, "Please fill all fields!");
+                JOptionPane.showMessageDialog(parentFrame, "Please fill all fields!");
             } else {
                 Account newAcc = new Account(newUser, newPwd, "ministry");
                 if (AccountDAO.addAccount(newAcc) != null) {
-                    JOptionPane.showMessageDialog(null, "Added successfully!");
+                    JOptionPane.showMessageDialog(parentFrame, "Added successfully!");
                 } else {
                     System.out.println("Not added");
                 }

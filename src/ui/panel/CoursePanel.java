@@ -23,7 +23,7 @@ public class CoursePanel extends JPanel {
     private JButton addBtn;
     private ArrayList<Course> courses;
 
-    public CoursePanel() {
+    public CoursePanel(JFrame containerFrame) {
         String[] columns = {"Course ID", "Subject", "Semester", "Lecturer", "Room", "Shift", "Slots", "Delete"};
         courseTable = new JTable();
         courseTable.setModel(new DefaultTableModel(columns, 0));
@@ -69,7 +69,7 @@ public class CoursePanel extends JPanel {
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                newCoursePane.display();
+                newCoursePane.display(containerFrame);
                 getCourseList();
             }
         });

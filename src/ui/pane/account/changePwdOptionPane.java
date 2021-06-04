@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class changePwdOptionPane {
-    public static void display() {
+    public static void display(JFrame parentFrame) {
         JTextField userField = new JTextField(AccountManager.getActiveAccount().getUsername());
         userField.setEditable(false);
         JPasswordField pwdField = new JPasswordField();
@@ -15,7 +15,7 @@ public class changePwdOptionPane {
         panel.add(userField);
         panel.add(new JLabel("Your new password:"));
         panel.add(pwdField);
-        int result = JOptionPane.showConfirmDialog(null, panel, "Change Password",
+        int result = JOptionPane.showConfirmDialog(parentFrame, panel, "Change Password",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             String newPwd = pwdField.getText();

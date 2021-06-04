@@ -22,7 +22,7 @@ public class AccountPanel extends JPanel {
     private JButton addBtn;
     private ArrayList<Account> minAccs;
 
-    public AccountPanel() {
+    public AccountPanel(JFrame containerFrame) {
         String[] columns = {"Username", "Type", "Update Password", "Delete"};
         accountTable = new JTable();
         accountTable.setModel(new DefaultTableModel(columns, 0));
@@ -43,7 +43,7 @@ public class AccountPanel extends JPanel {
                     final int row = jTable.getSelectedRow();
                     final int column = jTable.getSelectedColumn();
                     if (column == 2) {
-                        updatePassword(minAccs.get(row));
+                        updatePassword(containerFrame, minAccs.get(row));
                     }
                     if (column == 3) {
                         deleteAccount(minAccs.get(row));
@@ -74,7 +74,7 @@ public class AccountPanel extends JPanel {
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                newAccountPane.display();
+                newAccountPane.display(containerFrame);
                 showMinistryAccountList();
             }
         });
@@ -105,9 +105,8 @@ public class AccountPanel extends JPanel {
         }
     }
 
-    private void updatePassword(Account acc) {
-//        return AccountDAO.updateAccount(acc);
-        updatePwdPane.display(acc);
+    private void updatePassword(JFrame containerFrame, Account acc) {
+        updatePwdPane.display(containerFrame, acc);
     }
 
     private void deleteAccount(Account acc) {

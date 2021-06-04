@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class newSubjectPane {
-    public static void display() {
+    public static void display(JFrame parentFrame) {
         JTextField subjectIdField = new JTextField();
         JTextField subjectNameField = new JTextField();
         Integer[] credit = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -26,11 +26,11 @@ public class newSubjectPane {
             String subjectName = subjectNameField.getText();
             int credits = (int) subjectCreditsCombo.getSelectedItem();
             if ((subjectIdField.equals("")) || (subjectNameField.equals(""))) {
-                JOptionPane.showMessageDialog(null, "Please fill all fields!");
+                JOptionPane.showMessageDialog(parentFrame, "Please fill all fields!");
             } else {
                 Subject newSubject = new Subject(subjectId, subjectName, credits);
                 if (SubjectDAO.addSubject(newSubject) != null) {
-                    JOptionPane.showMessageDialog(null, "Added successfully!");
+                    JOptionPane.showMessageDialog(parentFrame, "Added successfully!");
                 } else {
                     System.out.println("Not added");
                 }

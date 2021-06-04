@@ -36,7 +36,7 @@ public class MinistryFrame extends JFrame {
         this.setTitle("Ministry");
         ActiveSemester.getActiveSemesterFromDB();
         initComponents();
-        initEvents();
+        initEvents(this);
     }
 
     private void initComponents() {
@@ -117,18 +117,18 @@ public class MinistryFrame extends JFrame {
         contentPane.add(rightPanel, BorderLayout.CENTER);
     }
 
-    private void initEvents() {
+    private void initEvents(JFrame containerFrame) {
         changePwdBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changePwdOptionPane.display();
+                changePwdOptionPane.display(containerFrame);
             }
         });
 
         accountPanelBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                AccountPanel ap = new AccountPanel();
+                AccountPanel ap = new AccountPanel(containerFrame);
                 rightPanel.removeAll();
                 rightPanel.revalidate();
                 rightPanel.repaint();
@@ -139,7 +139,7 @@ public class MinistryFrame extends JFrame {
         subjectPanelBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                SubjectPanel sp = new SubjectPanel();
+                SubjectPanel sp = new SubjectPanel(containerFrame);
                 rightPanel.removeAll();
                 rightPanel.revalidate();
                 rightPanel.repaint();
@@ -150,7 +150,7 @@ public class MinistryFrame extends JFrame {
         semesterPanelBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                SemesterPanel sp = new SemesterPanel();
+                SemesterPanel sp = new SemesterPanel(containerFrame);
                 rightPanel.removeAll();
                 rightPanel.revalidate();
                 rightPanel.repaint();
@@ -161,7 +161,7 @@ public class MinistryFrame extends JFrame {
         classPanelBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ClassPanel cp = new ClassPanel();
+                ClassPanel cp = new ClassPanel(containerFrame);
                 rightPanel.removeAll();
                 rightPanel.revalidate();
                 rightPanel.repaint();
@@ -172,11 +172,21 @@ public class MinistryFrame extends JFrame {
         coursePanelBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                CoursePanel cp = new CoursePanel();
+                CoursePanel cp = new CoursePanel(containerFrame);
                 rightPanel.removeAll();
                 rightPanel.revalidate();
                 rightPanel.repaint();
                 rightPanel.add(cp);
+            }
+        });
+        studentPanelBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                StudentPanel sp = new StudentPanel(containerFrame);
+                rightPanel.removeAll();
+                rightPanel.revalidate();
+                rightPanel.repaint();
+                rightPanel.add(sp);
             }
         });
     }

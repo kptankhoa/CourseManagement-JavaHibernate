@@ -41,6 +41,22 @@ public class StudentDAO {
         return res;
     }
 
+    public static ArrayList<Student> getStudentsByClassId(String classId){
+        ArrayList<Student> students = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "from Student s left join fetch s.clazz where s.clazz.classId = :classId";
+            Query query = session.createQuery(hql);
+            query.setString("classId", classId);
+            students = (ArrayList<Student>) query.list();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return students;
+    }
+
     public static Student addStudent(Student student) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (StudentDAO.getStudentById(student.getStudentId()) != null) {

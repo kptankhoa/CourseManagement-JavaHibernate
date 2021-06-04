@@ -6,5 +6,8 @@ Author: Khoa Phan - Student ID: 1712537\
 
 ## Usage
 ```
-run main/app.java
+- configure database
+- execute coursesdbexport from resourse folder
+- add jdatepicker & mysql-connector-java from lib folder to project library
+- run main/app.java
 ```

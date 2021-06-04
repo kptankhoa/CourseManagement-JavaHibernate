@@ -23,7 +23,7 @@ public class SubjectPanel extends JPanel {
     private JButton addBtn;
     private ArrayList<Subject> subjects;
 
-    public SubjectPanel() {
+    public SubjectPanel(JFrame containerFrame) {
         String[] columns = {"Subject ID", "Name", "Credits", "Update", "Delete"};
         subjectTable = new JTable();
         subjectTable.setModel(new DefaultTableModel(columns, 0));
@@ -44,7 +44,7 @@ public class SubjectPanel extends JPanel {
                     final int row = jTable.getSelectedRow();
                     final int column = jTable.getSelectedColumn();
                     if (column == 3) {
-                        updateSubject(subjects.get(row));
+                        updateSubject(containerFrame, subjects.get(row));
                         getSubjectList();
                     }
                     if (column == 4) {
@@ -76,7 +76,7 @@ public class SubjectPanel extends JPanel {
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                newSubjectPane.display();
+                newSubjectPane.display(containerFrame);
                 getSubjectList();
             }
         });
@@ -106,8 +106,8 @@ public class SubjectPanel extends JPanel {
         }
     }
 
-    private void updateSubject(Subject subject) {
-        updateSubjectPane.display(subject);
+    private void updateSubject(JFrame containerFrame, Subject subject) {
+        updateSubjectPane.display(containerFrame, subject);
     }
 
     private void deleteSubject(Subject subject) {

@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class updateSubjectPane {
-    public static void display(Subject subject) {
+    public static void display(JFrame parentFrame, Subject subject) {
         JTextField subjectIdField = new JTextField(subject.getSubjectId());
         subjectIdField.setEditable(false);
         JTextField subjectNameField = new JTextField(subject.getName());
@@ -21,18 +21,18 @@ public class updateSubjectPane {
         panel.add(subjectNameField);
         panel.add(new JLabel("Number of credits:"));
         panel.add(subjectCreditsCombo);
-        int result = JOptionPane.showConfirmDialog(null, panel, "Update Subject",
+        int result = JOptionPane.showConfirmDialog(parentFrame, panel, "Update Subject",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             String subjectId = subjectIdField.getText();
             String subjectName = subjectNameField.getText();
             int credits = (int) subjectCreditsCombo.getSelectedItem();
             if ((subjectNameField.equals(""))) {
-                JOptionPane.showMessageDialog(null, "Please fill all fields!");
+                JOptionPane.showMessageDialog(parentFrame, "Please fill all fields!");
             } else {
                 Subject newSubject = new Subject(subjectId, subjectName, credits);
                 if (SubjectDAO.updateSubject(newSubject) != null) {
-                    JOptionPane.showMessageDialog(null, "Added successfully!");
+                    JOptionPane.showMessageDialog(parentFrame, "Added successfully!");
                 } else {
                     System.out.println("Not added");
                 }

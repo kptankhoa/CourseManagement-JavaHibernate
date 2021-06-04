@@ -21,7 +21,7 @@ public class ClassPanel extends JPanel {
     private JButton addBtn;
     private ArrayList<Clazz> classes;
 
-    public ClassPanel() {
+    public ClassPanel(JFrame containerFrame) {
         String[] columns = {"Class ID", "No. of Students", "Males", "Females", "Delete"};
         classTable = new JTable();
         classTable.setModel(new DefaultTableModel(columns, 0));
@@ -68,7 +68,7 @@ public class ClassPanel extends JPanel {
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                newClassPane.display();
+                newClassPane.display(containerFrame);
                 getClassList();
             }
         });

@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class   updatePwdPane {
-    public static void display(Account acc) {
+    public static void display(JFrame parentFrame, Account acc) {
         JTextField userField = new JTextField(acc.getUsername());
         userField.setEditable(false);
         JPasswordField pwdField = new JPasswordField();
@@ -17,7 +17,7 @@ public class   updatePwdPane {
         panel.add(userField);
         panel.add(new JLabel("New password:"));
         panel.add(pwdField);
-        int result = JOptionPane.showConfirmDialog(null, panel, "Update Password",
+        int result = JOptionPane.showConfirmDialog(parentFrame, panel, "Update Password",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             String newPwd = pwdField.getText();

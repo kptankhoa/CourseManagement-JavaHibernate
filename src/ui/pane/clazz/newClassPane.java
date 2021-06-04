@@ -9,7 +9,7 @@ import java.awt.*;
 import static java.lang.Integer.parseInt;
 
 public class newClassPane extends JPanel {
-    public static void display() {
+    public static void display(JFrame parentFrame) {
         JTextField classIdField = new JTextField();
         JTextField totalStudentField = new JTextField();
         JTextField totalMaleField = new JTextField();
@@ -23,7 +23,7 @@ public class newClassPane extends JPanel {
         panel.add(totalMaleField);
         panel.add(new JLabel("Number of Female Students:"));
         panel.add(totalFemaleField);
-        int result = JOptionPane.showConfirmDialog(null, panel, "New Class",
+        int result = JOptionPane.showConfirmDialog(parentFrame, panel, "New Class",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             String classId = classIdField.getText();
@@ -31,11 +31,11 @@ public class newClassPane extends JPanel {
             int males = parseInt(totalMaleField.getText());
             int females = parseInt(totalFemaleField.getText());
             if (males + females != total) {
-                JOptionPane.showMessageDialog(null, "Invalid Inputs!");
+                JOptionPane.showMessageDialog(parentFrame, "Invalid Inputs!");
             } else {
                 Clazz newClazz = new Clazz(classId, total, males, females);
                 if (ClazzDAO.addClass(newClazz) != null) {
-                    JOptionPane.showMessageDialog(null, "Added successfully!");
+                    JOptionPane.showMessageDialog(parentFrame, "Added successfully!");
                 } else {
                     System.out.println("Not added");
                 }
