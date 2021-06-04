@@ -74,7 +74,13 @@ public class SemesterPanel extends JPanel {
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                newSemesterPane.display(containerFrame, semesters.get(semesters.size()-1).getSemesterId()+1);
+                int newId;
+                if (semesters.size() == 0) {
+                    newId = 1;
+                } else {
+                    newId = semesters.get(semesters.size() - 1).getSemesterId() + 1;
+                }
+                newSemesterPane.display(containerFrame, newId);
                 getSemesterList();
             }
         });

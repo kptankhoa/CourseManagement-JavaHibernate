@@ -3,7 +3,6 @@ package ui.panel;
 import dao.RegistrationSessionDAO;
 import model.RegistrationSession;
 import model.Semester;
-import ui.pane.semester.newSemesterPane;
 import ui.pane.session.newRegistrationSessionPane;
 
 import javax.swing.*;
@@ -50,7 +49,13 @@ public class RegistrationSessionPanel extends JPanel {
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                newRegistrationSessionPane.display(containerFrame, registrationSessions.get(registrationSessions.size()-1).getSessionId()+1);
+                int newId;
+                if (registrationSessions.size() == 0) {
+                    newId = 1;
+                } else {
+                    newId = registrationSessions.get(registrationSessions.size() - 1).getSessionId() + 1;
+                }
+                newRegistrationSessionPane.display(containerFrame, newId);
                 getRegistrationSessionList();
             }
         });
@@ -68,8 +73,8 @@ public class RegistrationSessionPanel extends JPanel {
         DefaultTableModel model = (DefaultTableModel) registrationSessionsTable.getModel();
         model.setRowCount(0);
         registrationSessions = RegistrationSessionDAO.getAllRegistrationSessions();
-        if(!registrationSessions.isEmpty()){
-            for (RegistrationSession session: registrationSessions){
+        if (!registrationSessions.isEmpty()) {
+            for (RegistrationSession session : registrationSessions) {
                 Semester s = session.getSemester();
                 String semester = s.getName() + " - " + s.getSchoolYear();
                 String startDate = session.getStartDate().toString();
