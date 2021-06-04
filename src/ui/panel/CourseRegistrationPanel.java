@@ -2,8 +2,10 @@ package ui.panel;
 
 import dao.CourseDAO;
 import dao.RegistrationDAO;
-import model.*;
-import ui.pane.student.newStudentPane;
+import model.ActiveSemester;
+import model.Course;
+import model.Registration;
+import model.Semester;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +19,6 @@ public class CourseRegistrationPanel extends JPanel {
     private final JPanel mainPanel;
     private JComboBox courseCombo;
     private JButton chooseBtn;
-    private ArrayList<Registration> registrations;
     private ArrayList<Course> activeCourses;
     private Semester activeSemester = ActiveSemester.getActiveSemester();
     private JLabel courseIdLabel;
@@ -27,9 +28,8 @@ public class CourseRegistrationPanel extends JPanel {
     private JLabel studyTimeLabel;
 
 
-
-    public CourseRegistrationPanel(){
-        String[] columns ={"Student ID", "Name", "Registration Time"};
+    public CourseRegistrationPanel() {
+        String[] columns = {"Student ID", "Name", "Registration Time"};
         studentTable = new JTable();
         studentTable.setModel(new DefaultTableModel(columns, 0));
         studentTable.setRowHeight(30);
@@ -118,7 +118,7 @@ public class CourseRegistrationPanel extends JPanel {
         this.add(mainPanel);
     }
 
-    private void updateTable(ArrayList<Registration> registrations){
+    private void updateTable(ArrayList<Registration> registrations) {
         DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
         model.setRowCount(0);
         if (!registrations.isEmpty()) {
@@ -133,7 +133,7 @@ public class CourseRegistrationPanel extends JPanel {
         }
     }
 
-    private void updateBySelect(){
+    private void updateBySelect() {
         Course selectedCourse = activeCourses.get(courseCombo.getSelectedIndex());
         courseIdLabel.setText(selectedCourse.getCourseId());
         subjectIdLabel.setText(selectedCourse.getSubject().getSubjectId());

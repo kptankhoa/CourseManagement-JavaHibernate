@@ -15,6 +15,8 @@ public class LoginFrame extends JFrame {
 
     public LoginFrame() {
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     private void initComponents() {
@@ -57,6 +59,9 @@ public class LoginFrame extends JFrame {
 
     public void addLoginListener(ActionListener listener) {
         loginBtn.addActionListener(listener);
+    }
+    public void addLoginKeyListener(ActionListener listener) {
+        passwordField.addActionListener(listener);
     }
 
     public Account getAccount() {

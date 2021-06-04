@@ -58,6 +58,23 @@ public class RegistrationDAO {
         return registrations;
     }
 
+    public static ArrayList<Registration> getRegistrationBySemesterIdNStudentId(int semesterId, String studentId) {
+        ArrayList<Registration> registrations = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "select r from Registration r where r.pk.course.semester.semesterId = :semesterId and r.pk.student.studentId = :studentId";
+            Query query = session.createQuery(hql);
+            query.setString("semesterId", String.valueOf(semesterId));
+            query.setString("studentId", studentId);
+            registrations = (ArrayList<Registration>) query.list();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return registrations;
+    }
+
     public static Registration getRegistrationByPk(RegistrationPK pk) {
         String studentId = pk.getStudent().getStudentId();
         String courseId = pk.getCourse().getCourseId();

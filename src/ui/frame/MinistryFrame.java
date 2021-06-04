@@ -31,20 +31,20 @@ public class MinistryFrame extends JFrame {
     private JPanel topPanel;
 
     public MinistryFrame() {
+        ActiveSemester.getActiveSemesterFromDB();
         JFrame.setDefaultLookAndFeelDecorated(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(1000, 600));
         this.setTitle("Ministry");
         initComponents();
         initEvents(this);
-
-        ActiveSemester.getActiveSemesterFromDB();
+        this.pack();
+        this.setVisible(true);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     private void initComponents() {
-        ImageIcon imageIcon = new ImageIcon("ui/img/student.png");
-        this.setIconImage(imageIcon.getImage());
-
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -205,6 +205,16 @@ public class MinistryFrame extends JFrame {
                 rightPanel.add(rsp);
             }
         });
+        studentRegistrationPanelBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                StudentRegistrationPanel srp = new StudentRegistrationPanel();
+                rightPanel.removeAll();
+                rightPanel.revalidate();
+                rightPanel.repaint();
+                rightPanel.add(srp);
+            }
+        });
         courseRegistrationPanelBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -216,12 +226,6 @@ public class MinistryFrame extends JFrame {
             }
         });
     }
-
-    public void showGUI() {
-        this.pack();
-        this.setVisible(true);
-    }
-
 
     public void addLogoutListener(ActionListener listener) {
         logOutBtn.addActionListener(listener);
