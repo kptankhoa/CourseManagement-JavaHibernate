@@ -47,7 +47,6 @@ public class SemesterDAO {
         try {
             String hql = "select s from Semester s where s.active = 1";
             Query query = session.createQuery(hql);
-//            query.setString("semesterId", String.valueOf(semesterId));
             res = (Semester) query.uniqueResult();
         } catch (HibernateException ex) {
             System.err.println(ex);

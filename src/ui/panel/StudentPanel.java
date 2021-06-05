@@ -84,7 +84,6 @@ public class StudentPanel extends JPanel {
                 getStudentList();
             }
         });
-        //search ui component
         searchField = new JTextField("Search student by name...");
         searchField.setBounds(50, 0, 298, 30);
         searchField.addFocusListener(new FocusListener() {
@@ -123,9 +122,9 @@ public class StudentPanel extends JPanel {
         topPanel.add(searchBtn);
         topPanel.add(addBtn);
         mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setPreferredSize(new Dimension(800, 550));
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         mainPanel.add(topPanel, BorderLayout.NORTH);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(new Color(0xadb5bd));
         this.setOpaque(true);
         this.add(mainPanel);

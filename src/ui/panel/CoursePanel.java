@@ -26,7 +26,7 @@ public class CoursePanel extends JPanel {
     private Semester activeSemester = ActiveSemester.getActiveSemester();
 
     public CoursePanel(JFrame containerFrame) {
-        String[] columns = {"Course ID", "Subject", "Semester", "Lecturer", "Room", "Shift", "Slots", "Delete"};
+        String[] columns = {"Course ID", "Subject", "Semester", "Lecturer", "Room", "Study Time", "Slots", "Delete"};
         courseTable = new JTable();
         courseTable.setModel(new DefaultTableModel(columns, 0));
         courseTable.setRowHeight(30);
@@ -77,9 +77,9 @@ public class CoursePanel extends JPanel {
         });
         topPanel.add(addBtn);
         mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setPreferredSize(new Dimension(800, 550));
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         mainPanel.add(topPanel, BorderLayout.NORTH);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(new Color(0xadb5bd));
         this.setOpaque(true);
         this.add(mainPanel);
@@ -91,7 +91,6 @@ public class CoursePanel extends JPanel {
         courses = CourseDAO.getCoursesBySemesterId(activeSemester.getSemesterId());
         if (!courses.isEmpty()) {
             for (Course course : courses) {
-//                if (course.getSemester().equals(activeSemester)) {
                     String id = course.getCourseId();
                     String subject = course.getSubject().getName();
                     Semester s = course.getSemester();
@@ -102,7 +101,6 @@ public class CoursePanel extends JPanel {
                     int slots = course.getSlots();
                     Object[] row = {id, subject, semester, lecturer, room, shift, slots, "Delete"};
                     model.addRow(row);
-//                }
             }
         }
     }

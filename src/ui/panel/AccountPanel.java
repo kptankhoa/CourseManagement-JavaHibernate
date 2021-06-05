@@ -77,7 +77,6 @@ public class AccountPanel extends JPanel {
                 showMinistryAccountList();
             }
         });
-        //search ui
         searchField = new JTextField("Search account...");
         searchField.setBounds(50, 0, 398, 30);
         searchField.addFocusListener(new FocusListener() {
@@ -109,9 +108,9 @@ public class AccountPanel extends JPanel {
         topPanel.add(searchBtn);
         topPanel.add(addBtn);
         mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setPreferredSize(new Dimension(800, 550));
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         mainPanel.add(topPanel, BorderLayout.NORTH);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(new Color(0xadb5bd));
         this.setOpaque(true);
         this.add(mainPanel);

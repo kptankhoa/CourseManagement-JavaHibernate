@@ -17,7 +17,6 @@ public class StudentRegistrationPanel extends JPanel {
     private ArrayList<Student> students;
     private ArrayList<Course> activeCourses;
     private Semester activeSemester = ActiveSemester.getActiveSemester();
-//    private ArrayList<Registration> activeRegistrations;
 
     public StudentRegistrationPanel() {
         ArrayList<String> columns = new ArrayList<>(Arrays.asList("Student ID", "Student Name"));
@@ -31,7 +30,6 @@ public class StudentRegistrationPanel extends JPanel {
         studentTable.setBackground(new Color(0xced4da));
         studentTable.getTableHeader().setOpaque(false);
         studentTable.getTableHeader().setBackground(new Color(0x495057));
-//        activeRegistrations = RegistrationDAO.getRegistrationBySemesterId(ActiveSemester.getActiveSemester().getSemesterId());
         getStudentTableContent();
         JScrollPane scrollPane = new JScrollPane(studentTable);
         scrollPane.setBorder(BorderFactory.createLineBorder(new Color(0xadb5bd), 10));
@@ -45,9 +43,8 @@ public class StudentRegistrationPanel extends JPanel {
             }
         });
         mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setPreferredSize(new Dimension(800, 550));
-//        mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(new Color(0xadb5bd));
         this.setOpaque(true);
         this.add(mainPanel);

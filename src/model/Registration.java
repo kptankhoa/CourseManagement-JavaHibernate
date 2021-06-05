@@ -9,9 +9,13 @@ public class Registration {
     public Registration() {
     }
 
-
     public Registration(RegistrationPK pk, Timestamp registrationTime) {
         this.pk = pk;
+        this.registrationTime = registrationTime;
+    }
+
+    public Registration(Student student, Course course, Timestamp registrationTime) {
+        this.pk = new RegistrationPK(course, student);
         this.registrationTime = registrationTime;
     }
 

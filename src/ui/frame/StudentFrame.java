@@ -3,6 +3,8 @@ package ui.frame;
 import model.AccountManager;
 import model.ActiveSemester;
 import ui.pane.account.changePwdOptionPane;
+import ui.panel.AvailableCoursesPanel;
+import ui.panel.RegisteredCoursesPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +24,7 @@ public class StudentFrame extends JFrame {
     private JPanel rightPanel;
     private JPanel topPanel;
 
-    public StudentFrame(){
+    public StudentFrame() {
         ActiveSemester.getActiveSemesterFromDB();
         JFrame.setDefaultLookAndFeelDecorated(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,8 +35,9 @@ public class StudentFrame extends JFrame {
         this.pack();
         this.setVisible(true);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
     }
+
     private void initComponents() {
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new BorderLayout());
@@ -67,18 +70,15 @@ public class StudentFrame extends JFrame {
         leftPanel.setLayout(new GridLayout(0, 1, 5, 5));
         leftPanel.setBackground(new Color(0xadb5bd));
 
-        registerBtn = new JButton("Register Courses");
+        registerBtn = new JButton("<html>Register<br/>Available<br/>Courses</html>");
         registerBtn.setBackground(new Color(0x6c757d));
         registerBtn.setFocusable(false);
-        registrationBtn = new JButton("Your Registrations");
+        registrationBtn = new JButton("<html>Your<br/>Registrations</html>");
         registrationBtn.setBackground(new Color(0x6c757d));
         registrationBtn.setFocusable(false);
 
         leftPanel.add(registerBtn);
         leftPanel.add(registrationBtn);
-        leftPanel.add(new JLabel());
-        leftPanel.add(new JLabel());
-        leftPanel.add(new JLabel());
 
         rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
@@ -94,6 +94,26 @@ public class StudentFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 changePwdOptionPane.display(containerFrame);
+            }
+        });
+        registerBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                AvailableCoursesPanel acp = new AvailableCoursesPanel();
+                rightPanel.removeAll();
+                rightPanel.revalidate();
+                rightPanel.repaint();
+                rightPanel.add(acp);
+            }
+        });
+        registrationBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                RegisteredCoursesPanel rcp = new RegisteredCoursesPanel();
+                rightPanel.removeAll();
+                rightPanel.revalidate();
+                rightPanel.repaint();
+                rightPanel.add(rcp);
             }
         });
     }

@@ -42,6 +42,21 @@ public class RegistrationSessionDAO {
         }
         return res;
     }
+    public static ArrayList<RegistrationSession> getRegistrationSessionsBySemesterId(int semesterId){
+        ArrayList<RegistrationSession> rSessions = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "select r from RegistrationSession r where r.semester.semesterId = :semesterId";
+            Query query = session.createQuery(hql);
+            query.setString("semesterId", String.valueOf(semesterId));
+            rSessions = (ArrayList<RegistrationSession>) query.list();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return rSessions;
+    }
 
     public static RegistrationSession addRegistrationSession(RegistrationSession rSession){
         Session session = HibernateUtil.getSessionFactory().openSession();

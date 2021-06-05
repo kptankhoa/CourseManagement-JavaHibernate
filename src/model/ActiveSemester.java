@@ -9,7 +9,6 @@ public class ActiveSemester {
         return activeSemester;
     }
 
-    //not change in db yet
     public static void setNewActiveSemester(Semester activeSemester) {
         Semester tmpSemester = ActiveSemester.getActiveSemester();
         tmpSemester.setActive(0);

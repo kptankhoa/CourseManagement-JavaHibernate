@@ -51,7 +51,7 @@ public class ClazzDAO {
             transaction = session.beginTransaction();
             session.save(clazz);
             transaction.commit();
-        } catch (HibernateException ex) { //Log the exception
+        } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
         } finally {
@@ -70,7 +70,7 @@ public class ClazzDAO {
             transaction = session.beginTransaction();
             session.update(clazz);
             transaction.commit();
-        } catch (HibernateException ex) { //Log the exception
+        } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
         } finally {
@@ -89,7 +89,7 @@ public class ClazzDAO {
             transaction = session.beginTransaction();
             session.delete(clazz);
             transaction.commit();
-        } catch (HibernateException ex) { //Log the exception
+        } catch (HibernateException ex) {
             transaction.rollback();
             System.err.println(ex);
         } finally {

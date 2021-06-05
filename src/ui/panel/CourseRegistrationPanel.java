@@ -110,9 +110,9 @@ public class CourseRegistrationPanel extends JPanel {
         topPanel.add(studyTime);
         topPanel.add(studyTimeLabel);
         mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setPreferredSize(new Dimension(800, 550));
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(new Color(0xadb5bd));
         this.setOpaque(true);
         this.add(mainPanel);
